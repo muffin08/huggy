@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Happy Hug Day 💕</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('bg.jpg') no-repeat center center/cover;
+  font-family: 'Comic Sans MS', cursive;
+  cursor: pointer;
+}
+
+/* Floating Hearts */
+.heart {
+  position: absolute;
+  color: #ff9ecb;
+  font-size: 20px;
+  animation: float 6s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 0; }
+  30% { opacity: 0.8; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Envelope */
+.wrapper {
+  perspective: 1000px;
+  width: 420px;
+  height: 270px;
+  position: relative;
+}
+
+.envelope {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ffc0cb, #ff9ecb);
+  border-radius: 15px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.flap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #ff85b3;
+  clip-path: polygon(0 0, 50% 65%, 100% 0);
+  transform-origin: top;
+  transition: transform 1.2s ease;
+  z-index: 2;
+}
+
+/* Letter */
+.letter {
+  position: absolute;
+  width: 88%;
+  height: 75%;
+  background: #fff0f5;
+  top: 12%;
+  left: 6%;
+  border-radius: 15px;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  transform: translateY(120%);
+  transition: transform 1.2s ease;
+  opacity: 0;
+}
+
+.letter h2 {
+  margin-top: 0;
+  color: #ff4d94;
+}
+
+.signature {
+  margin-top: 15px;
+  font-style: italic;
+  color: #d63384;
+}
+
+/* Open State */
+.open .flap {
+  transform: rotateX(180deg);
+}
+
+.open .letter {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.6s;
+}
+
+/* Second Photo */
+#secondPhoto {
+  display: none;
+  max-width: 85%;
+  max-height: 85%;
+  border-radius: 25px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+  animation: fadeIn 1.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+</style>
+</head>
+
+<body onclick="nextStep()">
+
+<div class="wrapper" id="envelopeBox">
+  <div class="envelope">
+    <div class="flap"></div>
+    <div class="letter">
+      <h2>HAPPPY HUG DAY BABYY💕💕</h2>
+      <p>
+        i lowkey wish i could meeet u huggggg rn 😔<br><br>
+        i promise to hug you very tight when we meet 🫶
+      </p>
+      <div class="signature">— From Danish 💕</div>
+    </div>
+  </div>
+</div>
+
+<img id="secondPhoto" src="second.jpg">
+
+<script>
+let step = 0;
+
+function nextStep() {
+  step++;
+
+  if(step === 1){
+    document.getElementById("envelopeBox").classList.add("open");
+  }
+  else if(step === 2){
+    document.getElementById("envelopeBox").style.display = "none";
+    document.getElementById("secondPhoto").style.display = "block";
+  }
+}
+
+/* Generate Floating Hearts */
+for(let i=0; i<20; i++){
+  let heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "💗";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.animationDuration = (4 + Math.random()*4) + "s";
+  document.body.appendChild(heart);
+}
+</script>
+
+</body>
+</html>
